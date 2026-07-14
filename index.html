@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RITHIS // Creative Developer & Designer</title>
+    <meta name="description" content="Portfolio of Rithis, a world-class creative developer and designer specialized in high-performance WebGL, motion design, and sleek, minimalist interactive frontends.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+    <div id="custom-cursor-ring"></div>
+
+    <!-- Interactive Grid Background -->
+    <div class="interactive-grid-container">
+        <div class="grid-lines"></div>
+        <div class="grid-glow-spotlight"></div>
+    </div>
+
+    <!-- Preloader Screen -->
+    <div id="preloader">
+        <!-- Futuristic Cyber Backdrop Grid & Scanlines -->
+        <div class="loader-backdrop">
+            <div class="loader-grid"></div>
+            <div class="loader-scanline"></div>
+        </div>
+
+        <div class="loader-content">
+            <!-- Top indicator -->
+            <div class="loader-top-indicator">
+                <span class="loader-tag">SEC_INIT // PROTOCOL.X</span>
+                <span class="flow-state-text">flow state</span>
+                <span class="loader-tag">SYS_VER // 3.0.9</span>
+            </div>
+            
+            <!-- Center branding with tech HUD circle -->
+            <div class="loader-center">
+                <div class="hud-circle-ring ring-outer"></div>
+                <div class="hud-circle-ring ring-inner"></div>
+                <h1 class="loader-brand">RITHIS</h1>
+            </div>
+            
+            <!-- Bottom progress info -->
+            <div class="loader-bottom-progress">
+                <div class="loader-telemetry">
+                    <span>SECTOR: 0x7F // RAM: OK</span>
+                    <span>FPS: 60.00 // LOCK: ACTIVE</span>
+                </div>
+                <div class="loader-status-container">
+                    <span class="loader-status" id="loader-keyword">optimising</span>
+                    <span class="loader-counter"><span id="loader-percentage">00</span>%</span>
+                </div>
+                <div class="loader-bar-bg">
+                    <div class="loader-bar-fill" id="loader-fill"></div>
+                    <div class="loader-bar-glow"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating macOS style Top Menu Bar -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo magnet">RITHIS<span class="dot">.</span></a>
+            <div class="header-right">
+                <div class="local-time">
+                    <span class="time-label">LOCAL TIME</span>
+                    <span class="time-val" id="time-display">00:00:00 AM</span>
+                </div>
+                <div class="status-indicators">
+                    <span class="status-item magnet" id="wifi-btn"><i data-lucide="wifi"></i></span>
+                    <span class="status-item magnet" id="video-btn"><i data-lucide="video"></i></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- macOS Dock Navigation -->
+    <div class="mac-dock-container">
+        <div class="mac-dock">
+            <a href="#about" class="dock-item" data-label="About">
+                <i data-lucide="user"></i>
+                <span class="dock-indicator"></span>
+            </a>
+            <a href="#projects" class="dock-item" data-label="Work">
+                <i data-lucide="briefcase"></i>
+                <span class="dock-indicator"></span>
+            </a>
+            <a href="#bento-skills" class="dock-item" data-label="Expertise">
+                <i data-lucide="cpu"></i>
+                <span class="dock-indicator"></span>
+            </a>
+            <a href="#experience" class="dock-item" data-label="Journey">
+                <i data-lucide="compass"></i>
+                <span class="dock-indicator"></span>
+            </a>
+            <a href="#media" class="dock-item" data-label="Media">
+                <i data-lucide="film"></i>
+                <span class="dock-indicator"></span>
+            </a>
+            <a href="#contact" class="dock-item" data-label="Contact">
+                <i data-lucide="send"></i>
+                <span class="dock-indicator"></span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-bg-shapes">
+                <div class="hero-glow-1"></div>
+                <div class="hero-glow-2"></div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-tagline reveal-text">
+                    <span class="tag-dot"></span>
+                    <span>Wana Know About Me...? I</span>
+                </div>
+                <div class="hero-main-title">
+                    <div class="reveal-text"><h1 class="hero-line">CREATE</h1></div>
+                    <div class="reveal-text"><h1 class="hero-line outline-text">CRAFT</h1></div>
+                    <div class="reveal-text"><h1 class="hero-line">EXPLORE</h1></div>
+                </div>
+                <div class="hero-footer">
+                    <div class="hero-description reveal-text">
+                        <p>I create stunning software projects, interactive websites, UI/UX, logo designs, logo animation, and video editing.</p>
+                    </div>
+                    <div class="hero-scroll-indicator magnet" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+                        <span class="scroll-arrow">
+                            <i data-lucide="arrow-down"></i>
+                        </span>
+                        <span class="scroll-text">SCROLL TO EXPLORE</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Philosophy Section -->
+        <section id="about" class="about-section">
+            <div class="section-container">
+                <div class="section-num">/01</div>
+                <h2 class="section-title">THE PHILOSOPHY</h2>
+                <div class="about-grid">
+                    <div class="about-text-wrapper">
+                        <p class="about-highlight-paragraph scroll-highlight">
+                            We exist in a digital landscape crowded with uninspired platforms and generic designs. I believe that every digital touchpoint should be visceral. My mission is to blend creative engineering, immersive UI/UX, custom logo designs, fluid logo animations, and cinematic video editing to craft stunning software projects and interactive websites that command attention and leave a lasting impression.
+                        </p>
+                    </div>
+                    <div class="about-details">
+                        <div class="about-metric">
+                            <h3 class="metric-num">45+</h3>
+                            <p class="metric-lbl">Pixels Perfectly Placed</p>
+                        </div>
+                        <div class="about-metric">
+                            <h3 class="metric-num">99%</h3>
+                            <p class="metric-lbl">Lighthouse Performance</p>
+                        </div>
+                        <div class="about-metric">
+                            <h3 class="metric-num">01</h3>
+                            <p class="metric-lbl">Obsession: Perfection</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Showcase (Horizontal Scroll Pin Section) -->
+        <section id="projects" class="projects-pin-wrapper">
+            <div id="projects-pin">
+                <div class="projects-title-block">
+                    <div class="section-num">/02</div>
+                    <h2 class="section-title">SELECTED WORKS</h2>
+                    <div class="scroll-hint">
+                        <span class="scroll-hint-line"></span>
+                        <span>SCROLL DOWNHILL FOR MORE</span>
+                    </div>
+                </div>
+                <div class="projects-horizontal-slider">
+                    <!-- Project 1 -->
+                    <div class="project-card cursor-view" data-project="01">
+                        <div class="project-img-container">
+                            <img src="assets/project1.png" alt="Aegis Shield - Cybersecurity UI" class="project-img" loading="lazy">
+                            <div class="project-overlay"></div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-category">WEB DESIGN / SECURITY</span>
+                            <h3 class="project-title">AEGIS SHIELD DASHBOARD</h3>
+                            <div class="project-tags">
+                                <span>3D GLOW</span>
+                                <span>CYBER SECURITY</span>
+                                <span>INTERACTIVE GRID</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="project-card cursor-view" data-project="02">
+                        <div class="project-img-container">
+                            <img src="assets/project2.png" alt="Aether Finance - Web3 App" class="project-img" loading="lazy">
+                            <div class="project-overlay"></div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-category">DEFI / WEB3 APPLICATION</span>
+                            <h3 class="project-title">AETHER FINANCE PLATFORM</h3>
+                            <div class="project-tags">
+                                <span>GLASSMORPHISM</span>
+                                <span>WEB3</span>
+                                <span>DYNAMICS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="project-card cursor-view" data-project="03">
+                        <div class="project-img-container">
+                            <img src="assets/project3.png" alt="Nexus Studio - Creative Studio" class="project-img" loading="lazy">
+                            <div class="project-overlay"></div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-category">CREATIVE STUDIO / BRANDING</span>
+                            <h3 class="project-title">NEXUS STUDIO INTERACTIVE</h3>
+                            <div class="project-tags">
+                                <span>HEAVY TYPOGRAPHY</span>
+                                <span>FLUID MOTION</span>
+                                <span>LUXURY DESIGN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bento Grid Skills & Expertise -->
+        <section id="bento-skills" class="bento-section">
+            <div class="section-container">
+                <div class="section-num">/03</div>
+                <h2 class="section-title">THE CAPABILITIES</h2>
+                <div class="bento-grid">
+                    <!-- Card 1: Software Projects & Engineering -->
+                    <div class="bento-card col-span-2 row-span-2 bento-glow-effect">
+                        <div class="bento-content">
+                            <div class="bento-icon"><i data-lucide="cpu"></i></div>
+                            <h3 class="bento-title">Software Engineering</h3>
+                            <p class="bento-desc">Building robust, high-performance software projects from scratch. Fusing clean architecture, optimal state management, and modern logic to build complete digital solutions.</p>
+                            <div class="bento-footer-tags">
+                                <span>Software Development</span>
+                                <span>Clean Logic</span>
+                                <span>API Architecture</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2: Interactive Web Development -->
+                    <div class="bento-card col-span-1 row-span-1 bento-glow-effect">
+                        <div class="bento-content">
+                            <div class="bento-icon"><i data-lucide="zap"></i></div>
+                            <h3 class="bento-title">Interactive Websites</h3>
+                            <p class="bento-desc">Crafting immersive web experiences with butter-smooth scrolling, custom animations, and responsive layouts that look spectacular on any screen.</p>
+                        </div>
+                    </div>
+                    <!-- Card 3: UI/UX & Logo Design -->
+                    <div class="bento-card col-span-1 row-span-2 bento-glow-effect">
+                        <div class="bento-content">
+                            <div class="bento-icon"><i data-lucide="pen-tool"></i></div>
+                            <h3 class="bento-title">UI/UX &amp; Logo Design</h3>
+                            <p class="bento-desc">Designing intuitive user interfaces and modern, distinctive logos. I focus on creating cohesive visual systems, elegant typography, and high-impact layouts.</p>
+                            <div class="bento-footer-tags">
+                                <span>Figma</span>
+                                <span>Logo Design</span>
+                                <span>UI Systems</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 4: Motion & Video Editing -->
+                    <div class="bento-card col-span-1 row-span-1 bento-glow-effect">
+                        <div class="bento-content">
+                            <div class="bento-icon"><i data-lucide="video"></i></div>
+                            <h3 class="bento-title">Motion &amp; Video Editing</h3>
+                            <p class="bento-desc">Bringing brands to life with fluid logo animations and high-end video editing tailored for digital platforms and visual storytelling.</p>
+                        </div>
+                    </div>
+                    <!-- Card 5: Core Tenet -->
+                    <div class="bento-card col-span-2 row-span-1 bento-glow-effect statement-card">
+                        <div class="bento-content">
+                            <span class="statement-lbl">CORE TENET</span>
+                            <blockquote class="statement-text">"Stunning software is the perfect fusion of flawless logic and visceral design."</blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Timeline Section -->
+        <section id="experience" class="experience-section">
+            <div class="section-container">
+                <div class="section-num">/04</div>
+                <h2 class="section-title">THE TIMELINE</h2>
+                <div class="timeline-container">
+                    <!-- SVG timeline connector -->
+                    <div class="timeline-svg-wrapper">
+                        <svg width="6" height="100%" viewBox="0 0 6 100" preserveAspectRatio="none" class="timeline-svg">
+                            <line x1="3" y1="0" x2="3" y2="100" stroke="#1c1c1e" stroke-width="4" stroke-linecap="round"></line>
+                            <path id="timeline-path" d="M 3 0 L 3 1000" stroke="#ffffff" stroke-width="4" stroke-linecap="round" fill="none"></path>
+                        </svg>
+                    </div>
+
+                    <!-- Timeline Item 1 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot magnet"></div>
+                        <div class="timeline-date">2026 - PRESENT</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-role">Software Developer</h3>
+                            <h4 class="timeline-company">INDEPENDENT CREATIVE</h4>
+                            <p class="timeline-desc">Building custom software projects, high-performance web applications, and immersive UI/UX systems. Fusing clean backend logic with flawless visual presentation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot magnet"></div>
+                        <div class="timeline-date">2024 - 2025</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-role">Video Editor</h3>
+                            <h4 class="timeline-company">MOTION MEDIA &amp; CONTENT</h4>
+                            <p class="timeline-desc">Crafting high-impact video assets, creative cuts, visual transitions, and syncing sound design to bring brand stories to life on digital platforms.</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 3 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot magnet"></div>
+                        <div class="timeline-date">2023 - 2024</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-role">Logo Designer</h3>
+                            <h4 class="timeline-company">VISUAL BRAND IDENTITIES</h4>
+                            <p class="timeline-desc">Designing unique brand marks, typography guidelines, and custom vector icons. Fusing visual simplicity with memorable aesthetic values.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Media Showcase Section -->
+        <section id="media" class="media-section">
+            <div class="section-container">
+                <div class="section-num">/05</div>
+                
+                <!-- Top Row: Title (Media) & Description -->
+                <div class="media-header">
+                    <div class="media-title-box">
+                        <h2 class="media-title">MEDIA</h2>
+                    </div>
+                    <div class="media-desc-box">
+                        <p class="media-description">
+                            Fusing audio pacing, visual edits, and motion graphic assets. Selected creative video sequences, cinematic edits, and sound lockups capturing the raw artistic flow.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Middle Row: Controllable Slider of Video Cards -->
+                <div class="media-ticker-container">
+                    <div class="media-ticker-track-wrapper">
+                        <div class="media-ticker-track" id="media-track">
+                            <!-- Card 1 -->
+                            <div class="media-card cursor-view">
+                                <div class="media-card-inner">
+                                    <div class="media-card-glow"></div>
+                                    <div class="media-card-hud">
+                                        <span class="hud-item">CAM_01</span>
+                                        <span class="hud-item text-red">● REC</span>
+                                    </div>
+                                    <div class="media-playback-overlay">
+                                        <div class="play-btn-circle"><i data-lucide="play"></i></div>
+                                    </div>
+                                    <div class="media-card-waves">
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                    </div>
+                                    <div class="media-card-footer">
+                                        <span class="media-card-num">01/</span>
+                                        <span class="media-card-title">CINEMATIC SEQUENCING</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="media-card cursor-view">
+                                <div class="media-card-inner">
+                                    <div class="media-card-glow"></div>
+                                    <div class="media-card-hud">
+                                        <span class="hud-item">CAM_02</span>
+                                        <span class="hud-item">MUTED</span>
+                                    </div>
+                                    <div class="media-playback-overlay">
+                                        <div class="play-btn-circle"><i data-lucide="play"></i></div>
+                                    </div>
+                                    <div class="media-card-waves">
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                    </div>
+                                    <div class="media-card-footer">
+                                        <span class="media-card-num">02/</span>
+                                        <span class="media-card-title">LOGO ANIMATION</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="media-card cursor-view">
+                                <div class="media-card-inner">
+                                    <div class="media-card-glow"></div>
+                                    <div class="media-card-hud">
+                                        <span class="hud-item">CAM_03</span>
+                                        <span class="hud-item">STEREO</span>
+                                    </div>
+                                    <div class="media-playback-overlay">
+                                        <div class="play-btn-circle"><i data-lucide="play"></i></div>
+                                    </div>
+                                    <div class="media-card-waves">
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                    </div>
+                                    <div class="media-card-footer">
+                                        <span class="media-card-num">03/</span>
+                                        <span class="media-card-title">VISUAL EFFECTS</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 4 -->
+                            <div class="media-card cursor-view">
+                                <div class="media-card-inner">
+                                    <div class="media-card-glow"></div>
+                                    <div class="media-card-hud">
+                                        <span class="hud-item">CAM_04</span>
+                                        <span class="hud-item text-red">● LIVE</span>
+                                    </div>
+                                    <div class="media-playback-overlay">
+                                        <div class="play-btn-circle"><i data-lucide="play"></i></div>
+                                    </div>
+                                    <div class="media-card-waves">
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                    </div>
+                                    <div class="media-card-footer">
+                                        <span class="media-card-num">04/</span>
+                                        <span class="media-card-title">AUDIO RE-MASTER</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Duplicate items once for seamless loop -->
+                            <!-- Card 1 Duplicate -->
+                            <div class="media-card cursor-view">
+                                <div class="media-card-inner">
+                                    <div class="media-card-glow"></div>
+                                    <div class="media-card-hud">
+                                        <span class="hud-item">CAM_01</span>
+                                        <span class="hud-item text-red">● REC</span>
+                                    </div>
+                                    <div class="media-playback-overlay">
+                                        <div class="play-btn-circle"><i data-lucide="play"></i></div>
+                                    </div>
+                                    <div class="media-card-waves">
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                    </div>
+                                    <div class="media-card-footer">
+                                        <span class="media-card-num">01/</span>
+                                        <span class="media-card-title">CINEMATIC SEQUENCING</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 2 Duplicate -->
+                            <div class="media-card cursor-view">
+                                <div class="media-card-inner">
+                                    <div class="media-card-glow"></div>
+                                    <div class="media-card-hud">
+                                        <span class="hud-item">CAM_02</span>
+                                        <span class="hud-item">MUTED</span>
+                                    </div>
+                                    <div class="media-playback-overlay">
+                                        <div class="play-btn-circle"><i data-lucide="play"></i></div>
+                                    </div>
+                                    <div class="media-card-waves">
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                    </div>
+                                    <div class="media-card-footer">
+                                        <span class="media-card-num">02/</span>
+                                        <span class="media-card-title">LOGO ANIMATION</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 3 Duplicate -->
+                            <div class="media-card cursor-view">
+                                <div class="media-card-inner">
+                                    <div class="media-card-glow"></div>
+                                    <div class="media-card-hud">
+                                        <span class="hud-item">CAM_03</span>
+                                        <span class="hud-item">STEREO</span>
+                                    </div>
+                                    <div class="media-playback-overlay">
+                                        <div class="play-btn-circle"><i data-lucide="play"></i></div>
+                                    </div>
+                                    <div class="media-card-waves">
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                    </div>
+                                    <div class="media-card-footer">
+                                        <span class="media-card-num">03/</span>
+                                        <span class="media-card-title">VISUAL EFFECTS</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 4 Duplicate -->
+                            <div class="media-card cursor-view">
+                                <div class="media-card-inner">
+                                    <div class="media-card-glow"></div>
+                                    <div class="media-card-hud">
+                                        <span class="hud-item">CAM_04</span>
+                                        <span class="hud-item text-red">● LIVE</span>
+                                    </div>
+                                    <div class="media-playback-overlay">
+                                        <div class="play-btn-circle"><i data-lucide="play"></i></div>
+                                    </div>
+                                    <div class="media-card-waves">
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                        <span class="wave-bar"></span>
+                                    </div>
+                                    <div class="media-card-footer">
+                                        <span class="media-card-num">04/</span>
+                                        <span class="media-card-title">AUDIO RE-MASTER</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Row: Instagram/About (Left) & Till Death We Do Art Quote (Right) -->
+                <div class="media-footer">
+                    <div class="media-links">
+                        <a href="https://instagram.com" target="_blank" class="media-btn magnet">
+                            <span class="media-btn-text">INSTAGRAM</span>
+                            <span class="media-btn-dot"></span>
+                        </a>
+                        <a href="#about" class="media-btn magnet">
+                            <span class="media-btn-text">ABOUT</span>
+                            <span class="media-btn-dot"></span>
+                        </a>
+                    </div>
+                    <div class="media-quote">
+                        <span class="quote-solid">TILL DEATH</span>
+                        <span class="quote-outline outline-text">WE DO ART</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="section-container">
+                <div class="section-num">/05</div>
+                <h2 class="section-title">THE ENGAGEMENT</h2>
+                <div class="contact-grid">
+                    <div class="contact-info-block">
+                        <h3 class="contact-headline">LET'S MAKE IT REAL.</h3>
+                        <p class="contact-sub">Have a project, a question, or a vision that needs a world-class standard? Drop a message, and let's craft digital mastery together.</p>
+                        <div class="contact-details-list">
+                            <div class="contact-detail-item">
+                                <span class="lbl">SEND MAIL</span>
+                                <a href="mailto:hello@rithis.dev" class="val hover-underline magnet">hello@rithis.dev</a>
+                            </div>
+                            <div class="contact-detail-item">
+                                <span class="lbl">SOCIAL PLACES</span>
+                                <div class="social-row">
+                                    <a href="#" class="hover-underline magnet">GitHub</a>
+                                    <a href="#" class="hover-underline magnet">LinkedIn</a>
+                                    <a href="#" class="hover-underline magnet">Twitter</a>
+                                    <a href="#" class="hover-underline magnet">Dribbble</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form-block">
+                        <form id="portfolio-contact-form" class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully! (Demo Mode)');">
+                            <div class="form-group">
+                                <label for="form-name">YOUR IDENTITY</label>
+                                <input type="text" id="form-name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-email">YOUR TELECOMMUNICATION</label>
+                                <input type="email" id="form-email" placeholder="john@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-message">YOUR COGNITIONS</label>
+                                <textarea id="form-message" rows="4" placeholder="Tell me about your vision..." required></textarea>
+                            </div>
+                            <div class="button-wrapper">
+                                <button type="submit" class="submit-btn magnet" id="magnetic-submit">
+                                    <span class="btn-text">DISPATCH MESSAGE</span>
+                                    <span class="btn-arrow"><i data-lucide="send"></i></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <p>&copy; 2026 RITHIS. ALL CODE AND CONCEPT DESIGNED BY HAND.</p>
+            </div>
+            <div class="footer-right">
+                <span class="system-spec"><i data-lucide="terminal"></i> SYSTEM: ONLINE // WEBGL STACK v3.0</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container"></div>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Lenis Smooth Scroll CDN -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
