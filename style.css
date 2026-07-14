@@ -459,15 +459,26 @@ header {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     font-weight: 800;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.04em;
     color: var(--color-text-primary);
+    text-decoration: none;
 }
 
-.logo .dot {
-    color: var(--color-text-muted);
+.logo-svg {
+    width: 26px;
+    height: 26px;
+    color: var(--color-text-primary);
+    transition: transform 0.5s var(--ease-out-expo);
+}
+
+.logo:hover .logo-svg {
+    transform: rotate(30deg) scale(1.12);
 }
 
 /* macOS Bottom Dock Navigation */
