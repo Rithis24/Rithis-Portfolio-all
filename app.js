@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCursorRing();
 
     // Hover modifiers
-    const hoverTargets = document.querySelectorAll("a, button, .nav-toggle, .hero-scroll-indicator, .status-item");
+    const hoverTargets = document.querySelectorAll("a:not(.cursor-view), button, .nav-toggle, .hero-scroll-indicator, .status-item");
     hoverTargets.forEach((target) => {
         target.addEventListener("mouseenter", () => {
             document.body.classList.add("cursor-hover");
