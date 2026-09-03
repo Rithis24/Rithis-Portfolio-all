@@ -692,16 +692,244 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 10. Media Slider Loop Auto-Scroll Ticker
+    // 10. Media Showcase Video Cards & Cinema Modal System
+    const mediaPlaylist = [
+        { src: "assets/z-900.mp4", num: "01/", hud: "CAM_01 ● 4K 60FPS", title: "KAWASAKI Z900 REEL", desc: "High-octane motorcycle cinematography, speed ramps, and aggressive sound pacing." },
+        { src: "assets/peak.mp4", num: "02/", hud: "CAM_02 ● COLOR GRADE", title: "PEAK PERFORMANCE", desc: "Cinematic grading, high dynamic range highlights, and precision motion tracking." },
+        { src: "assets/pc.mp4", num: "03/", hud: "CAM_03 ● TECH RIG", title: "BATTLESTATION SETUP", desc: "Minimalist battlestation showcase, ambient lighting design, and industrial hardware cut." },
+        { src: "assets/frame 1.mp4", num: "04/", hud: "CAM_04 ● VFX COMP", title: "FRAME FLOW // MOTION", desc: "Seamless transitions, bespoke typography animation, and kinetic visual sequences." },
+        { src: "assets/lv_0_20250309094352.mp4", num: "05/", hud: "CAM_05 ● SYNC CUT", title: "DYNAMIC VISUAL REEL I", desc: "High-energy visual pacing, rhythmic beat matching, and modern stylistic color work." },
+        { src: "assets/lv_0_20250914170503.mp4", num: "06/", hud: "CAM_06 ● SPEED RAMP", title: "STREET CULTURE CUT", desc: "Urban vibe sequencing, glitch overlays, and quick-cut temporal shifts." },
+        { src: "assets/lv_0_20251109005341.mp4", num: "07/", hud: "CAM_07 ● SOUND DESIGN", title: "CINEMATIC SEQUENCE", desc: "Immersive audio landscape with layered foley, sub-bass impacts, and visual storytelling." },
+        { src: "assets/lv_0_20251114161400.mp4", num: "08/", hud: "CAM_08 ● MASTER GRADE", title: "VISUAL SHOWCASE 04", desc: "Full-spectrum visual edit blending motion graphics, clean typography, and cinematic flare." }
+    ];
+
+    const mediaCards = document.querySelectorAll(".media-card");
+    const videoModal = document.getElementById("video-modal");
+    const modalVideo = document.getElementById("modal-video-element");
+    const modalHud = document.getElementById("modal-video-hud");
+    const modalCounter = document.getElementById("modal-video-counter");
+    const modalTitle = document.getElementById("modal-video-title");
+    const modalDesc = document.getElementById("modal-video-desc");
+    const modalPlayOverlay = document.getElementById("modal-play-overlay");
+    const modalPlayPauseBtn = document.getElementById("modal-play-pause-btn");
+    const modalSoundBtn = document.getElementById("modal-sound-btn");
+    const modalSoundIcon = document.getElementById("modal-sound-icon");
+    const modalCloseBtn = document.getElementById("modal-close-btn");
+    const modalBackdrop = document.getElementById("video-modal-backdrop");
+    const modalPrevBtn = document.getElementById("modal-prev-btn");
+    const modalNextBtn = document.getElementById("modal-next-btn");
+    const modalProgressWrap = document.getElementById("modal-progress-wrap");
+    const modalProgressFill = document.getElementById("modal-progress-fill");
+    const modalTimeDisplay = document.getElementById("modal-time-display");
+    const modalFullscreenBtn = document.getElementById("modal-fullscreen-btn");
+
+    let currentVideoIndex = 0;
+
+    // Format seconds to mm:ss
+    const formatTime = (seconds) => {
+        if (isNaN(seconds)) return "00:00";
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    };
+
+    // Card Hover: Play preview video softly on hover
+    mediaCards.forEach((card) => {
+        const video = card.querySelector(".media-card-video");
+        if (video) {
+            card.addEventListener("mouseenter", () => {
+                video.play().catch(() => {});
+            });
+            card.addEventListener("mouseleave", () => {
+                video.pause();
+            });
+        }
+
+        // Card Click: Open Cinema Video Modal
+        card.addEventListener("click", () => {
+            const index = parseInt(card.getAttribute("data-index"), 10) || 0;
+            openVideoModal(index);
+        });
+    });
+
+    const loadModalVideo = (index) => {
+        if (!modalVideo || !mediaPlaylist[index]) return;
+        currentVideoIndex = index;
+        const item = mediaPlaylist[index];
+
+        modalVideo.src = item.src;
+        if (modalHud) modalHud.textContent = item.hud;
+        if (modalCounter) modalCounter.textContent = `${String(index + 1).padStart(2, "0")} / ${String(mediaPlaylist.length).padStart(2, "0")}`;
+        if (modalTitle) modalTitle.textContent = item.title;
+        if (modalDesc) modalDesc.textContent = item.desc;
+
+        if (modalProgressFill) modalProgressFill.style.width = "0%";
+        if (modalTimeDisplay) modalTimeDisplay.textContent = "00:00 / 00:00";
+
+        modalVideo.muted = false;
+        if (modalSoundIcon) {
+            modalSoundIcon.setAttribute("data-lucide", "volume-2");
+            if (typeof lucide !== "undefined") lucide.createIcons();
+        }
+
+        modalVideo.play().then(() => {
+            if (modalPlayOverlay) modalPlayOverlay.classList.remove("show-play");
+            updatePlayIcons(true);
+        }).catch(() => {
+            // Autoplay with audio was prevented, fallback to muted play
+            modalVideo.muted = true;
+            if (modalSoundIcon) modalSoundIcon.setAttribute("data-lucide", "volume-x");
+            if (typeof lucide !== "undefined") lucide.createIcons();
+            modalVideo.play().catch(() => {});
+        });
+    };
+
+    const updatePlayIcons = (isPlaying) => {
+        const subIcon = document.getElementById("modal-sub-play-icon");
+        const playIcon = document.getElementById("modal-play-icon");
+        const iconName = isPlaying ? "pause" : "play";
+        if (subIcon) subIcon.setAttribute("data-lucide", iconName);
+        if (playIcon) playIcon.setAttribute("data-lucide", iconName);
+        if (typeof lucide !== "undefined") lucide.createIcons();
+    };
+
+    const togglePlayPause = () => {
+        if (!modalVideo) return;
+        if (modalVideo.paused) {
+            modalVideo.play();
+            if (modalPlayOverlay) modalPlayOverlay.classList.remove("show-play");
+            updatePlayIcons(true);
+        } else {
+            modalVideo.pause();
+            if (modalPlayOverlay) modalPlayOverlay.classList.add("show-play");
+            updatePlayIcons(false);
+        }
+    };
+
+    const openVideoModal = (index) => {
+        if (!videoModal) return;
+        loadModalVideo(index);
+        videoModal.classList.add("active");
+        videoModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    };
+
+    const closeVideoModal = () => {
+        if (!videoModal) return;
+        videoModal.classList.remove("active");
+        videoModal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        if (modalVideo) {
+            modalVideo.pause();
+            modalVideo.src = "";
+        }
+    };
+
+    if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeVideoModal);
+    if (modalBackdrop) modalBackdrop.addEventListener("click", closeVideoModal);
+
+    if (modalPlayOverlay) modalPlayOverlay.addEventListener("click", togglePlayPause);
+    if (modalPlayPauseBtn) modalPlayPauseBtn.addEventListener("click", togglePlayPause);
+
+    if (modalSoundBtn) {
+        modalSoundBtn.addEventListener("click", () => {
+            if (!modalVideo) return;
+            modalVideo.muted = !modalVideo.muted;
+            if (modalSoundIcon) {
+                modalSoundIcon.setAttribute("data-lucide", modalVideo.muted ? "volume-x" : "volume-2");
+                if (typeof lucide !== "undefined") lucide.createIcons();
+            }
+        });
+    }
+
+    if (modalPrevBtn) {
+        modalPrevBtn.addEventListener("click", () => {
+            const nextIdx = (currentVideoIndex - 1 + mediaPlaylist.length) % mediaPlaylist.length;
+            loadModalVideo(nextIdx);
+        });
+    }
+
+    if (modalNextBtn) {
+        modalNextBtn.addEventListener("click", () => {
+            const nextIdx = (currentVideoIndex + 1) % mediaPlaylist.length;
+            loadModalVideo(nextIdx);
+        });
+    }
+
+    // Modal Video Time & Progress Updates
+    if (modalVideo) {
+        modalVideo.addEventListener("timeupdate", () => {
+            if (modalVideo.duration) {
+                const percent = (modalVideo.currentTime / modalVideo.duration) * 100;
+                if (modalProgressFill) modalProgressFill.style.width = `${percent}%`;
+                if (modalTimeDisplay) {
+                    modalTimeDisplay.textContent = `${formatTime(modalVideo.currentTime)} / ${formatTime(modalVideo.duration)}`;
+                }
+            }
+        });
+
+        modalVideo.addEventListener("ended", () => {
+            // Auto advance to next video in playlist
+            const nextIdx = (currentVideoIndex + 1) % mediaPlaylist.length;
+            loadModalVideo(nextIdx);
+        });
+    }
+
+    // Scrubber click to seek
+    if (modalProgressWrap && modalVideo) {
+        modalProgressWrap.addEventListener("click", (e) => {
+            const rect = modalProgressWrap.getBoundingClientRect();
+            const clickPos = (e.clientX - rect.left) / rect.width;
+            if (modalVideo.duration) {
+                modalVideo.currentTime = clickPos * modalVideo.duration;
+            }
+        });
+    }
+
+    // Fullscreen toggle
+    if (modalFullscreenBtn && modalVideo) {
+        modalFullscreenBtn.addEventListener("click", () => {
+            if (document.fullscreenElement) {
+                document.exitFullscreen().catch(() => {});
+            } else {
+                const wrap = document.querySelector(".video-modal-player-wrap");
+                if (wrap && wrap.requestFullscreen) {
+                    wrap.requestFullscreen().catch(() => {});
+                } else if (modalVideo.requestFullscreen) {
+                    modalVideo.requestFullscreen().catch(() => {});
+                }
+            }
+        });
+    }
+
+    // Keyboard Shortcuts for Modal
+    window.addEventListener("keydown", (e) => {
+        if (!videoModal || !videoModal.classList.contains("active")) return;
+        if (e.key === "Escape") {
+            closeVideoModal();
+        } else if (e.key === "ArrowLeft") {
+            const nextIdx = (currentVideoIndex - 1 + mediaPlaylist.length) % mediaPlaylist.length;
+            loadModalVideo(nextIdx);
+        } else if (e.key === "ArrowRight") {
+            const nextIdx = (currentVideoIndex + 1) % mediaPlaylist.length;
+            loadModalVideo(nextIdx);
+        } else if (e.key === " " && e.target.tagName !== "INPUT" && e.target.tagName !== "TEXTAREA") {
+            e.preventDefault();
+            togglePlayPause();
+        }
+    });
+
+    // 11. Media Slider Loop Auto-Scroll Ticker
     const mediaWrapper = document.querySelector(".media-ticker-track-wrapper");
     
     if (mediaWrapper) {
-        let autoScrollSpeed = 0.6; // slow, smooth moving animation speed
+        let autoScrollSpeed = 0.65; // smooth moving animation speed
         let isPaused = false;
 
         // Custom ticker animation loop (requestAnimationFrame for steady fluid scroll)
         const autoScrollTick = () => {
-            if (!isPaused) {
+            if (!isPaused && (!videoModal || !videoModal.classList.contains("active"))) {
                 mediaWrapper.scrollLeft += autoScrollSpeed;
                 
                 // Seamless wrap: duplicate threshold is half of the scrollWidth
@@ -726,3 +954,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
